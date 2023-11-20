@@ -1,32 +1,81 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { analyzeImage, isConfigured as isAnalysisConfigured } from './azure-image-analysis';
+import { generateImage, isConfigured as isGenerationConfigured } from './azure-image-generation';
 
 function App() {
-  // const value = 'World';
-  // return <div>Hello {value} mama</div>;
-// Create a simple graphical user interface, eenabling the user to interact with the computer vision models. This GUI need to have the next elements:
-// 1. A title
-// 2. A text box to enter the URL of the image to be analyzed or the prompt of the image to generate
-// 3. A button to trigger the image analysis and one to trigger image generation
   const [url, setUrl] = useState('');
+  const [analysisResult, setAnalysisResult] = useState(null);
+  const [generatedImageUrl, setGeneratedImageUrl] = useState(null);
+  const [isConfigured, setIsConfigured] = useState(false);
 
-  const handleAnalysis = () => {
-    // Aquí va el código para analizar la imagen
-    
+  useEffect(() => {
+    if (isAnalysisConfigured() && isGenerationConfigured()) {
+      setIsConfigured(true);
+    }
+  }, []);
+
+  const handleAnalysis = async () => {
+    const result = await analyzeImage(url);
+    console.log(result);
+    setAnalysisResult(result);
   };
 
-  const handleGeneration = () => {
-    // Aquí va el código para generar la imagen
+  const handleGeneration = async () => {
+    // if (!analysisResult) return;
+    const result = await generateImage(analysisResult);
+    console.log(result);
+    // Assuming the result contains a property 'imageUrl' with the URL of the generated image
+    setGeneratedImageUrl(result.imageUrl);  
   };
+
+  const DisplayResults = () => {
+    if (!analysisResult && !generatedImageUrl) return null;
+    return (
+      <div>
+        {analysisResult && (
+          <div>
+            <h2>Analysis Results:</h2>
+            <pre>{JSON.stringify(analysisResult, null, 2)}</pre>
+          </div>
+        )}
+        {generatedImageUrl && (
+          <div>
+            <h2>Generated Image:</h2>
+            <img src={generatedImageUrl} alt="Generated image" style={{width: '300px', height: '300px'}} />
+          </div>
+        )}
+      </div>
+    );
+  };
+  if (!isConfigured) {
+    return (
+      <div>
+        <h1>Computer Vision</h1>
+        <p>Warning: The application is not configured properly. Please check your environment variables.</p>
+      </div>
+    );
+  }
 
   return (
     <div>
-      <h1>Título</h1>
-      <input type="text" value={url} onChange={(e) => setUrl(e.target.value)} />
-      <button onClick={handleAnalysis}>Analizar imagen</button>
-      <button onClick={handleGeneration}>Generar imagen</button>
+      <div>
+        <h1>Computer Vision</h1>
+      </div>
+      <div>
+        <input type="text" value={url} onChange={(e) => setUrl(e.target.value)} placeholder="Enter URL to analyze or textual prompt to generate an image" />
+      </div>
+      <div>  
+        <button onClick={handleAnalysis}>Analizar imagen</button>
+        <button onClick={handleGeneration}>Generar imagen</button>
+      </div>
+      <div>
+        {url && <img src={url} alt="Input" style={{width: '300px', height: '300px'}} />}
+      </div>
+      <div>
+        <DisplayResults />
+      </div>
     </div>
   );
-
 }
 
 export default App;
