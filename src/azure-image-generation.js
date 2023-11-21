@@ -5,7 +5,7 @@ export function isConfigured() {
 
 export async function generateImage(json) {
   const key = process.env.REACT_APP_AZURE_IMAGE_GENERATION_KEY ;
-  const description = json.description.captions[0].text;
+  const description = json.description.captions[0]?.text || "tortilla de patatas";
 
   const response = await fetch(
     'https://api.openai.com/v1/images/generations',

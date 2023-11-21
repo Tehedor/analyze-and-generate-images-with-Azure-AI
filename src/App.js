@@ -15,6 +15,10 @@ function App() {
   }, []);
 
   const handleAnalysis = async () => {
+    if (!url) {
+      alert('No url de la imagen para analizar.');
+      return;
+    }
     const result = await analyzeImage(url);
     console.log(result);
     setAnalysisResult(result);
@@ -22,6 +26,11 @@ function App() {
 
   const handleGeneration = async () => {
     // if (!analysisResult) return;
+    
+    if (!analysisResult) {
+      alert('No hay datos para generar una imagen.');
+      return;
+    }
     const result = await generateImage(analysisResult);
     console.log(result);
     // Assuming the result contains a property 'imageUrl' with the URL of the generated image
