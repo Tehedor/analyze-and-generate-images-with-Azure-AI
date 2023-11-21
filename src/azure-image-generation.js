@@ -1,13 +1,13 @@
 export function isConfigured() {
-  if (process.env.generate-images.REACT_APP_AZURE_IMAGE_GENERATION_KEY) {
+  if (process.env.REACT_APP_AZURE_IMAGE_GENERATION_KEY) {
     console.log('prueba 3');
   }
-  return process.env.generate-images.REACT_APP_AZURE_IMAGE_GENERATION_KEY ;
+  return process.env.REACT_APP_AZURE_IMAGE_GENERATION_KEY ;
 }
 
 
 export async function generateImage(json) {
-  const key = process.env.generate-images.REACT_APP_AZURE_IMAGE_GENERATION_KEY ;
+  const key = process.env.REACT_APP_AZURE_IMAGE_GENERATION_KEY ;
   const description = json.description.captions[0]?.text || "tortilla de patatas";
 
   const response = await fetch(
