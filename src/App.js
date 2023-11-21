@@ -50,7 +50,8 @@ function App() {
         {generatedImageUrl && (
           <div>
             <h2>Generated Image:</h2>
-            <img src={generatedImageUrl} alt="Generated image" style={{width: '300px', height: '300px'}} />
+            {/* <img src={generatedImageUrl}  style={{width: '300px', height: '300px'}} /> */}
+            <img src={generatedImageUrl} alt="Generated" style={{width: '300px', height: '300px'}} />
           </div>
         )}
       </div>
