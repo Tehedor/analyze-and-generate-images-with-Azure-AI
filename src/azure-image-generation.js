@@ -18,11 +18,11 @@ export async function generateImage(json) {
       body: JSON.stringify({
         // model: "dall-e",
         // model: "dall-e-2",
-        // model: "dall-e-3",
+        model: "dall-e-3",
         // prompt: "A cute baby sea otter",
         prompt: description,
         n: 1,
-        size: "1024x1024"
+        size: "1024x1024",
       })
     }
   );
