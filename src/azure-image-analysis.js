@@ -1,4 +1,11 @@
 export function isConfigured() {
+
+  if (process.env.process.env.REACT_APP_AZURE_IMAGE_ANALYSIS_KEY ) {
+    console.log('prueba 1');
+  }
+  if (process.env.REACT_APP_AZURE_IMAGE_ANALYSIS_ENDPOINT) {
+    console.log('prueba 2');
+  }
     return process.env.REACT_APP_AZURE_IMAGE_ANALYSIS_KEY && process.env.REACT_APP_AZURE_IMAGE_ANALYSIS_ENDPOINT;
   }
 
