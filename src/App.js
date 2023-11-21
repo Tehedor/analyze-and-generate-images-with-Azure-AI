@@ -10,17 +10,17 @@ function App() {
 
   // Appis control
 
-  if (process.env.REACT_APP_AZURE_IMAGE_GENERATION_KEY) {
+  if (process.env.generate-images.REACT_APP_AZURE_IMAGE_GENERATION_KEY) {
     console.log('prueba 3');
   }else{
     console.log('+++++');
   }
-  if (process.env.REACT_APP_AZURE_IMAGE_ANALYSIS_KEY ) {
+  if (process.env.generate-images.REACT_APP_AZURE_IMAGE_ANALYSIS_KEY ) {
     console.log('prueba 1');
   }else{
     console.log('-----');
   }
-  if (process.env.REACT_APP_AZURE_IMAGE_ANALYSIS_ENDPOINT) {
+  if (process.env.generate-images.REACT_APP_AZURE_IMAGE_ANALYSIS_ENDPOINT) {
     console.log('prueba 2');
   }else{
     console.log('--++--');
