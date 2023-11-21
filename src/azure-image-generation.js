@@ -1,7 +1,4 @@
 export function isConfigured() {
-  if (process.env.REACT_APP_AZURE_IMAGE_GENERATION_KEY) {
-    console.log('prueba 3');
-  }
   return process.env.REACT_APP_AZURE_IMAGE_GENERATION_KEY ;
 }
 
